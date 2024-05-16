@@ -1,10 +1,11 @@
 import Link from "next/link";
+import Header from "@/components/header";
 
 export default function Home() {
+
     return (
         <main>
-            <img id={"index-logo"} src="/logo.png" alt="a robot tinkering"/>
-            <h1>Welcome to Tech Tinker!</h1>
+            <Header/>
             <p><Link href={"/about"}>About</Link></p>
         </main>
     );
