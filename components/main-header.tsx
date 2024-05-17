@@ -12,10 +12,10 @@ const links = [
     {link: '/contraptions/share', label: 'Share'},
     {link: '/community', label: 'Community'},
     {
-        link: '#1',
+        link: '/about',
         label: 'About',
         links: [
-            {link: '/about', label: 'FAQ'},
+            {link: '/faq', label: 'FAQ'},
             {link: '/contact', label: 'Contact'},
         ],
     },
@@ -26,7 +26,7 @@ export default function MainHeader() {
 
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (
-            <Menu.Item key={item.link}>{item.label}</Menu.Item>
+            <Menu.Item key={item.link}><Link href={item.link} className={classes.link}>{item.label}</Link></Menu.Item>
         ));
 
         if (menuItems) {
