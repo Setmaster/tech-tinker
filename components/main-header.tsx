@@ -6,6 +6,7 @@ import techTinkerLogo from '@/assets/logo.png';
 import classes from './main-header.module.css';
 import Link from "next/link";
 import {Image as MantineImage, Avatar} from "@mantine/core";
+import {useRouter} from "next/navigation";
 
 const links = [
     {link: '/contraptions', label: 'Contraptions'},
@@ -23,6 +24,9 @@ const links = [
 
 export default function MainHeader() {
     const [opened, {toggle}] = useDisclosure(false);
+
+    const router = useRouter();
+    const navigateHome = () => router.push('/');
 
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (
@@ -63,7 +67,7 @@ export default function MainHeader() {
         <header className={classes.header}>
             <Container size="md">
                 <div className={classes.inner}>
-                    <Avatar src={techTinkerLogo.src} size={"md"}/>
+                    <Avatar className={classes.avatar} src={techTinkerLogo.src} size={"md"} onClick={navigateHome}/>
                     <Group gap={5} visibleFrom="sm">
                         {items}
                     </Group>
