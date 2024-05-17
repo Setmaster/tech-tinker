@@ -1,12 +1,12 @@
 'use client';
-import {Menu, Group, Center, Burger, Container} from '@mantine/core';
+import {Avatar, Burger, Center, Container, Group, Menu} from '@mantine/core';
 import {useDisclosure} from '@mantine/hooks';
 import {IconChevronDown} from '@tabler/icons-react';
 import techTinkerLogo from '@/assets/logo.png';
 import classes from './main-header.module.css';
 import Link from "next/link";
-import {Image as MantineImage, Avatar} from "@mantine/core";
 import {useRouter} from "next/navigation";
+import Image from "next/image";
 
 const links = [
     {link: '/contraptions', label: 'Contraptions'},
@@ -67,7 +67,7 @@ export default function MainHeader() {
         <header className={classes.header}>
             <Container size="md">
                 <div className={classes.inner}>
-                    <Avatar className={classes.avatar} src={techTinkerLogo.src} size={"md"} onClick={navigateHome}/>
+                    <Image width={56} height={56} style={{cursor: "pointer"}} src={techTinkerLogo.src} onClick={navigateHome} alt={"a white robot with blue eyes"}/>
                     <Group gap={5} visibleFrom="sm">
                         {items}
                     </Group>
