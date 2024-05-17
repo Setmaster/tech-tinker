@@ -1,5 +1,7 @@
 export default function ContraptionsPage(){
     return(
-        <h1>Contraptions Page</h1>
+        <main>
+            <h1>Contraptions Page</h1>
+        </main>
     );
 }

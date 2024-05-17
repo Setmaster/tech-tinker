@@ -1,5 +1,5 @@
 export default function ShareContraptionPage(){
     return(
-        <h1>Share Contraption</h1>
+        <main><h1>Share Contraption</h1></main>
     );
 }
