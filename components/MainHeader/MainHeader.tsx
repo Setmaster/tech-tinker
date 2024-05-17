@@ -7,7 +7,6 @@ import classes from './MainHeader.module.css';
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import ColorSchemeToggle from "@/components/ColorSchemeToggle/ColorSchemeToggle";
 
 const links = [
@@ -29,8 +28,6 @@ export default function MainHeader() {
 
     const router = useRouter();
     const navigateHome = () => router.push('/');
-
-    // const NoSSRColorSchemeToggle = dynamic(() => import('@/components/ColorSchemeToggle/ColorSchemeToggle'), {ssr: false});
     
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (

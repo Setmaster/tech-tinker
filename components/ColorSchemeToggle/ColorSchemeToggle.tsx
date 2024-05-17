@@ -9,18 +9,6 @@ import {useEffect, useState} from "react";
 export default function ColorSchemeToggle() {
     const {setColorScheme} = useMantineColorScheme();
     const computedColorScheme = useComputedColorScheme('light', {getInitialValueInEffect: true});
-    const [isClient, setIsClient] = useState(false);
-    
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-    
-    const getIcon = () => {
-        if (computedColorScheme === 'light') {
-            return <IconMoon className={cx(classes.icon, classes.dark)} stroke={1.5}/>;
-        }
-        return <IconSun className={cx(classes.icon, classes.light)} stroke={1.5}/>;
-    };
     
     return (
         <Group justify="center">
@@ -30,7 +18,8 @@ export default function ColorSchemeToggle() {
                 size="xl"
                 aria-label="Toggle color scheme"
             >
-                {isClient && getIcon()}
+                <IconSun className={cx(classes.icon, classes.light)} stroke={1.5} />
+                <IconMoon className={cx(classes.icon, classes.dark)} stroke={1.5} />
             </ActionIcon>
         </Group>
     );
