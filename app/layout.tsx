@@ -1,7 +1,8 @@
 import './globals.css'
 import '@mantine/core/styles.css';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
-import MainHeader from "@/components/main-header";
+import MainHeader from "@/components/MainHeader/MainHeader";
+import { theme } from '@/theme';
 
 export const metadata = {
     title: 'Tech Tinker',
@@ -21,7 +22,7 @@ export default function RootLayout({
             <ColorSchemeScript />
         </head>
         <body>
-        <MantineProvider>
+        <MantineProvider theme={theme}>
             <MainHeader/>
             {children}
         </MantineProvider>

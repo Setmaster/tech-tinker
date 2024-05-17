@@ -1,12 +1,14 @@
 'use client';
-import {Avatar, Burger, Center, Container, Group, Menu} from '@mantine/core';
+import {Burger, Center, Container, Group, Menu} from '@mantine/core';
 import {useDisclosure} from '@mantine/hooks';
 import {IconChevronDown} from '@tabler/icons-react';
 import techTinkerLogo from '@/assets/logo.png';
-import classes from './main-header.module.css';
+import classes from './MainHeader.module.css';
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+import ColorSchemeToggle from "@/components/ColorSchemeToggle/ColorSchemeToggle";
 
 const links = [
     {link: '/contraptions', label: 'Contraptions'},
@@ -28,6 +30,8 @@ export default function MainHeader() {
     const router = useRouter();
     const navigateHome = () => router.push('/');
 
+    // const NoSSRColorSchemeToggle = dynamic(() => import('@/components/ColorSchemeToggle/ColorSchemeToggle'), {ssr: false});
+    
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (
             <Menu.Item key={item.link}><Link href={item.link} className={classes.link}>{item.label}</Link></Menu.Item>
@@ -71,6 +75,7 @@ export default function MainHeader() {
                     <Group gap={5} visibleFrom="sm">
                         {items}
                     </Group>
+                    <ColorSchemeToggle />
                     <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm"/>
                 </div>
             </Container>
