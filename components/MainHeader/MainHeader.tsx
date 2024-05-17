@@ -71,8 +71,9 @@ export default function MainHeader() {
                     <Image width={56} height={56} style={{cursor: "pointer"}} src={techTinkerLogo.src} onClick={navigateHome} alt={"a white robot with blue eyes"}/>
                     <Group gap={5} visibleFrom="sm">
                         {items}
+                        <ColorSchemeToggle />
                     </Group>
-                    <ColorSchemeToggle />
+
                     <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm"/>
                 </div>
             </Container>
