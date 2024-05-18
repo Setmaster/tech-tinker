@@ -4,6 +4,7 @@ import { IconEye, IconMessageCircle } from '@tabler/icons-react';
 import { Card, Text, Group, Center, rem, useMantineTheme } from '@mantine/core';
 import classes from './ContraptionCard.module.css';
 import Image from "next/image";
+import Link from "next/link";
 
 type ContraptionCardProps = {
     title: string;
@@ -23,9 +24,9 @@ export default function ContraptionCard({title, slug, image, creator, views, com
             shadow="lg"
             className={classes.card}
             radius="md"
-            component="a"
-            href={slug}
-            target="_blank"
+            component={Link}
+            href={`/contraptions/${slug}`}
+            target="_self"
         >
             <div>
                 <Image
