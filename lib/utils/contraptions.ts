@@ -8,6 +8,6 @@ export async function getAllContraptions(): Promise<ContraptionProps[]> {
     return db.prepare('SELECT * FROM contraptions').all() as ContraptionProps[];
 }
 
-export async function getContraptions(amount: number){
+export function getContraptions(amount: number){
     return db.prepare(`SELECT * FROM contraptions LIMIT ${amount}`).all() as ContraptionProps[];
 }
