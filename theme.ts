@@ -18,5 +18,6 @@ const myColor: MantineColorsTuple = [
 export const theme = createTheme({
     colors: {
         myColor,
-    }
+    },
+    
 });
