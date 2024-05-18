@@ -11,6 +11,7 @@ import robot2 from '@/assets/robot2.png';
 import robot3 from '@/assets/robot3.png';
 import robot4 from '@/assets/robot4.png';
 import Image from "next/image";
+import classes from "./ImagesSlideshow.module.css"
 
 const images = [
     { image: contraption1, alt: 'A makeshift pancake maker' },
@@ -27,7 +28,7 @@ export default function ImagesSlideshow() {
 
     const slides = images.map((img, index) => (
         <Carousel.Slide key={index}>
-            <Image width={556} height={556} src={img.image} alt={img.alt}/>
+            <Image className={classes.slideImage} width={556} height={556} src={img.image} alt={img.alt}/>
         </Carousel.Slide>
     ));
     
@@ -37,7 +38,7 @@ export default function ImagesSlideshow() {
             plugins={[autoplay.current]}
             onMouseEnter={autoplay.current.stop}
             onMouseLeave={autoplay.current.reset}
-            slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }}
+            // slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }}
             slideGap={{ base: 0, sm: 'md' }}
             align={"center"}
             loop
