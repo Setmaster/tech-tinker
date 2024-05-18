@@ -8,6 +8,7 @@ import robot1 from '@/assets/robot1.png';
 import robot2 from '@/assets/robot2.png';
 import robot3 from '@/assets/robot3.png';
 import robot4 from '@/assets/robot4.png';
+import ContraptionCard from "@/components/contraptions/ContraptionCard";
 
 const mockdata = [
     {
@@ -41,18 +42,22 @@ const mockdata = [
 ];
 
 export default function ContraptionGrid() {
-    const cards = mockdata.map((article) => (
-        <Card withBorder={true} key={article.title} p="md" radius="md" component="a" href="#" className={classes.card}>
-            <AspectRatio ratio={800 / 800}>
-                <Image width={400} height={400} src={article.image.src} alt={article.title}/>
-            </AspectRatio>
-            <Text className={classes.title} mt={5}>
-                {article.title}
-            </Text>
-        </Card>
+    const cards = mockdata.map((article, index) => (
+            <ContraptionCard
+                key={index}
+                title={article.title}
+                image={article.image.src}
+                creator="John Doe"
+                slug={"slug"}
+                views={Math.floor(Math.random() * 100)}
+                comments={Math.floor(Math.random() * 20)}
+            />
     ));
 
     return (
-            <SimpleGrid cols={{ base: 1, sm: 2, md:3, xl:4 }}>{cards}</SimpleGrid>
+            <SimpleGrid cols={{ base: 1, sm: 2, md:3, xl:4 }}>
+                {cards}
+                
+            </SimpleGrid>
     );
     }
