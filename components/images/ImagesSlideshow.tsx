@@ -3,24 +3,17 @@
 import { Carousel } from '@mantine/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { useRef } from 'react';
-import contraption1 from '@/assets/contraption1.png';
-import contraption2 from '@/assets/contraption2.png';
-import contraption3 from '@/assets/contraption3.png';
-import robot1 from '@/assets/robot1.png';
-import robot2 from '@/assets/robot2.png';
-import robot3 from '@/assets/robot3.png';
-import robot4 from '@/assets/robot4.png';
 import Image from "next/image";
 import classes from "./ImagesSlideshow.module.css"
 
 const images = [
-    { image: contraption1, alt: 'A makeshift pancake maker' },
-    { image: robot1, alt: 'A robot with connected wires' },
-    { image: contraption2, alt: 'An egg desheller' },
-    { image: contraption3, alt: 'A potato holder' },
-    { image: robot2, alt: 'A robot with four wheels' },
-    { image: robot3, alt: 'An orange robot with big feet' },
-    { image: robot4, alt: 'A robot with spooky teeth' },
+    { image: "https://tinker-tech-user-images.s3.amazonaws.com/contraption1.png", alt: 'A makeshift pancake maker' },
+    { image: "https://tinker-tech-user-images.s3.amazonaws.com/robot1.png", alt: 'A robot with connected wires' },
+    { image: "https://tinker-tech-user-images.s3.amazonaws.com/contraption2.png", alt: 'An egg desheller' },
+    { image: "https://tinker-tech-user-images.s3.amazonaws.com/contraption3.png", alt: 'A potato holder' },
+    { image: "https://tinker-tech-user-images.s3.amazonaws.com/robot2.png", alt: 'A robot with four wheels' },
+    { image: "https://tinker-tech-user-images.s3.amazonaws.com/robot3.png", alt: 'An orange robot with big feet' },
+    { image: "https://tinker-tech-user-images.s3.amazonaws.com/robot4.png", alt: 'A robot with spooky teeth' },
 ];
 
 export default function ImagesSlideshow() {

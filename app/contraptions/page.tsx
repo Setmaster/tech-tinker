@@ -1,19 +1,12 @@
 import Link from 'next/link';
 import classes from './page.module.css';
 import ContraptionGrid from "@/components/contraptions/ContraptionGrid";
-import contraption1 from '@/assets/contraption1.png';
-import contraption2 from '@/assets/contraption2.png';
-import contraption3 from '@/assets/contraption3.png';
-import robot1 from '@/assets/robot1.png';
-import robot2 from '@/assets/robot2.png';
-import robot3 from '@/assets/robot3.png';
-import robot4 from '@/assets/robot4.png';
 
 const mockdata = [
     {
         id: 1,
         title: 'Spinning pancake maker',
-        image: contraption1.src,
+        image: "https://tinker-tech-user-images.s3.amazonaws.com/contraption1.png",
         creator: 'John Doe',
         slug: 'spinning-pancake-maker',
         views: 150,
@@ -22,7 +15,7 @@ const mockdata = [
     {
         id: 2,
         title: 'Robot with full limbs',
-        image: robot1.src,
+        image: "https://tinker-tech-user-images.s3.amazonaws.com/robot1.png",
         creator: 'Jane Doe',
         slug: 'robot-with-full-limbs',
         views: 245,
@@ -31,7 +24,7 @@ const mockdata = [
     {
         id: 3,
         title: 'Egg desheller',
-        image: contraption2.src,
+        image: "https://tinker-tech-user-images.s3.amazonaws.com/contraption2.png",
         creator: 'Jim Beam',
         slug: 'egg-desheller',
         views: 175,
@@ -40,7 +33,7 @@ const mockdata = [
     {
         id: 4,
         title: 'Potato holder and slicer',
-        image: contraption3.src,
+        image: "https://tinker-tech-user-images.s3.amazonaws.com/contraption3.png",
         creator: 'Jill Valentine',
         slug: 'potato-holder-and-slicer',
         views: 220,
@@ -49,7 +42,7 @@ const mockdata = [
     {
         id: 5,
         title: 'Wheeled robot',
-        image: robot2.src,
+        image: "https://tinker-tech-user-images.s3.amazonaws.com/robot2.png",
         creator: 'Jake Snake',
         slug: 'wheeled-robot',
         views: 198,
@@ -58,7 +51,7 @@ const mockdata = [
     {
         id: 6,
         title: 'Jumptron: The jumping robot',
-        image: robot3.src,
+        image: "https://tinker-tech-user-images.s3.amazonaws.com/robot3.png",
         creator: 'Jenny Block',
         slug: 'jumptron-the-jumping-robot',
         views: 300,
@@ -67,7 +60,7 @@ const mockdata = [
     {
         id: 7,
         title: 'Combat robot',
-        image: robot4.src,
+        image: "https://tinker-tech-user-images.s3.amazonaws.com/robot4.png",
         creator: 'Jon Snow',
         slug: 'combat-robot',
         views: 410,

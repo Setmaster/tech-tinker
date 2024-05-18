@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-import inventionIcon from '@/assets/icons/invention.png';
-import communityIcon from '@/assets/icons/community.png';
-import eventsIcon from '@/assets/icons/events.png';
+import inventionIcon from '@/assets/invention.png';
+import communityIcon from '@/assets/community.png';
+import eventsIcon from '@/assets/events.png';
 import classes from './page.module.css';
 
 export default function CommunityPage() {
