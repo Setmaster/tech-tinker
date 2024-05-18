@@ -4,7 +4,8 @@ import { ContraptionProps } from "@/lib/types/contraptionTypes";
 const db = sql('contraptions.db');
 
 export async function getAllContraptions(): Promise<ContraptionProps[]> {
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate slow network
+    // await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate slow network
+    // throw new Error('Server error');
     return db.prepare('SELECT * FROM contraptions').all() as ContraptionProps[];
 }
 

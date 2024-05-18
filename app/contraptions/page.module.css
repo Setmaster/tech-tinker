@@ -50,16 +50,23 @@
 
 @keyframes loading {
     0% {
-        color: #e9e9e9;
+        @mixin dark {
+            color: #e9e9e9;
+        }
+        @mixin light {
+            color: #3f3f3f;
+        }
     }
     50% {
-        color: #b89b84;
+        color: #4dffe8;
     }
     100% {
-        color: #e9e9e9;
-    }
-}
+        @mixin dark {
+            color: #e9e9e9;
+        }
+        @mixin light {
+            color: #3f3f3f;
+        }
 
-.main{
-padding: 0 2rem;
+    }
 }

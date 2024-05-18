@@ -2,9 +2,14 @@ import Link from 'next/link';
 import classes from './page.module.css';
 import ContraptionGrid from "@/components/contraptions/ContraptionGrid";
 import {getAllContraptions} from "@/lib/utils/contraptions";
+import {Suspense} from "react";
+
+async function Contraptions(){
+    const contraptions = await getAllContraptions();
+    return <ContraptionGrid contraptions={contraptions} />
+}
 
 export default async function ContraptionsPage(){
-    const contraptions = await getAllContraptions();
     
     return(
         <>
@@ -18,7 +23,11 @@ export default async function ContraptionsPage(){
             </div>
         </header>
         <main className={classes.main}>
-            <ContraptionGrid contraptions={contraptions} />
+            <Suspense fallback={
+                <p className={classes.loading}>Loading contraptions...</p>
+            }>
+                <Contraptions />
+            </Suspense>
         </main>
             </>
     );
