@@ -1,15 +1,17 @@
 import classes from './page.module.css';
 import Link from "next/link";
 import ImagesSlideshow from "@/components/images/ImagesSlideshow";
+import {getContraptions} from "@/lib/contraptions";
 
-export default function Home() {
+export default async function Home() {
+    const contraptions = await getContraptions();
 
     return (
         <>
 
         <header className={classes.header}>
             <div className={classes.slideshow}>
-                <ImagesSlideshow />
+                <ImagesSlideshow contraptions={contraptions} />
             </div>
 <div className={classes.headerTextContent}>
     <div className={classes.hero}>

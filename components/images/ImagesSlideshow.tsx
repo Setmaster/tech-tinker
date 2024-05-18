@@ -1,27 +1,19 @@
 'use client';
 
-import { Carousel } from '@mantine/carousel';
+import {Carousel} from '@mantine/carousel';
 import Autoplay from 'embla-carousel-autoplay';
-import { useRef } from 'react';
+import {useRef} from 'react';
 import Image from "next/image";
 import classes from "./ImagesSlideshow.module.css"
+import {IMAGE_BASE_URL} from "@/lib/constants";
+import {ContraptionPropsArray} from "@/lib/types/contraptionTypes";
 
-const images = [
-    { image: "https://tinker-tech-user-images.s3.amazonaws.com/contraption1.png", alt: 'A makeshift pancake maker' },
-    { image: "https://tinker-tech-user-images.s3.amazonaws.com/robot1.png", alt: 'A robot with connected wires' },
-    { image: "https://tinker-tech-user-images.s3.amazonaws.com/contraption2.png", alt: 'An egg desheller' },
-    { image: "https://tinker-tech-user-images.s3.amazonaws.com/contraption3.png", alt: 'A potato holder' },
-    { image: "https://tinker-tech-user-images.s3.amazonaws.com/robot2.png", alt: 'A robot with four wheels' },
-    { image: "https://tinker-tech-user-images.s3.amazonaws.com/robot3.png", alt: 'An orange robot with big feet' },
-    { image: "https://tinker-tech-user-images.s3.amazonaws.com/robot4.png", alt: 'A robot with spooky teeth' },
-];
-
-export default function ImagesSlideshow() {
+export default function ImagesSlideshow({contraptions} : ContraptionPropsArray) {
     const autoplay = useRef(Autoplay({ delay: 4000 }));
 
-    const slides = images.map((img, index) => (
+    const slides = contraptions.map((contraption, index) => (
         <Carousel.Slide key={index}>
-            <Image className={classes.slideImage} width={556} height={556} src={img.image} alt={img.alt}/>
+            <Image className={classes.slideImage} width={556} height={556} src={`${IMAGE_BASE_URL}${contraption.image}`} alt={contraption.description}/>
         </Carousel.Slide>
     ));
     

@@ -5,6 +5,7 @@ import { Card, Text, Group, Center, rem, useMantineTheme } from '@mantine/core';
 import classes from './ContraptionCard.module.css';
 import Image from "next/image";
 import Link from "next/link";
+import {IMAGE_BASE_URL} from "@/lib/constants";
 
 type ContraptionCardProps = {
     title: string;
@@ -30,7 +31,7 @@ export default function ContraptionCard({title, slug, image, creator, views, com
         >
             <div>
                 <Image
-                    src={image}
+                    src={`${IMAGE_BASE_URL}${image}`}
                     alt=""
                     layout="fill"
                     className={classes.image}

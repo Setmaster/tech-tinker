@@ -1,25 +1,9 @@
-import { SimpleGrid, Card, Text, Container, AspectRatio } from '@mantine/core';
-import Image from 'next/image';
-import classes from './ContraptionGrid.module.css';
+import {SimpleGrid} from '@mantine/core';
 
 import ContraptionCard from "@/components/contraptions/ContraptionCard";
+import { ContraptionPropsArray} from "@/lib/types/contraptionTypes";
 
-
-
-type ContraptionProps = {
-    id : number;
-    title: string;
-    image: string;
-    creator: string;
-    slug: string;
-    views: number;
-    commentsAmount: number;
-};
-
-type ContraptionGridProps = {
-    contraptions: ContraptionProps[];
-};
-export default function ContraptionGrid({contraptions}: ContraptionGridProps) {
+export default function ContraptionGrid({contraptions}: ContraptionPropsArray) {
     const cards = contraptions.map((data, index) => (
             <ContraptionCard
                 key={data.id}
