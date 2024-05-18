@@ -3,6 +3,7 @@
 import { IconEye, IconMessageCircle } from '@tabler/icons-react';
 import { Card, Text, Group, Center, rem, useMantineTheme } from '@mantine/core';
 import classes from './ContraptionCard.module.css';
+import Image from "next/image";
 
 type ContraptionCardProps = {
     title: string;
@@ -26,13 +27,15 @@ export default function ContraptionCard({title, slug, image, creator, views, com
             href={slug}
             target="_blank"
         >
-            <div
-                className={classes.image}
-                style={{
-                    backgroundImage:
-                        `url(${image})`,
-                }}
-            />
+            <div>
+                <Image
+                    src={image}
+                    alt=""
+                    layout="fill"
+                    className={classes.image}
+                    objectFit="cover" // This ensures the image covers the area of the div
+                />
+            </div>
             <div className={classes.overlay} />
 
             <div className={classes.content}>
