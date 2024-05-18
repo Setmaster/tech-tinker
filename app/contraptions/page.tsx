@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import classes from './page.module.css';
 import ContraptionGrid from "@/components/contraptions/ContraptionGrid";
-import {getContraptions} from "@/lib/contraptions";
+import {getAllContraptions} from "@/lib/utils/contraptions";
 
 export default async function ContraptionsPage(){
-    const contraptions = await getContraptions();
+    const contraptions = await getAllContraptions();
     
     return(
         <>

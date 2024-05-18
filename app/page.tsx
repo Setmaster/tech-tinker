@@ -1,10 +1,10 @@
 import classes from './page.module.css';
 import Link from "next/link";
 import ImagesSlideshow from "@/components/images/ImagesSlideshow";
-import {getContraptions} from "@/lib/contraptions";
+import {getAllContraptions, getContraptions} from "@/lib/utils/contraptions";
 
 export default async function Home() {
-    const contraptions = await getContraptions();
+    const contraptions = await getContraptions(3);
 
     return (
         <>
