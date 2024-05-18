@@ -37,12 +37,9 @@ export default function MainHeader() {
         const normalizePath = (path:string) => path.endsWith('/') ? path.slice(0, -1) : path;
         currentPath = normalizePath(currentPath);
         link = normalizePath(link);
-
-        console.log(currentPath, link)
+        
         // Check for exact match
-        if (currentPath === link) return true;
-
-        return false;
+        return currentPath === link;
     };
     
     const items = links.map((link) => {
