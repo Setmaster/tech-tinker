@@ -1,19 +1,26 @@
 import classes from './page.module.css';
 import Link from "next/link";
+import ImagesSlideshow from "@/components/images/ImagesSlideshow";
 
 export default function Home() {
 
     return (
         <>
-        <header>
-            <div className={classes.hero}>
-                <h1>Innovate and Elevate with Every Creation</h1>
-                <p>Discover, build, and share cutting-edge contraptions with inventors worldwide.</p>
+
+        <header className={classes.header}>
+            <div className={classes.slideshow}>
+                <ImagesSlideshow />
             </div>
-            <div className={classes.cta}>
-                <Link href={'/community'}>Join the Community</Link>
-                <Link href={'/contraptions'}>Explore Contraptions</Link>
-            </div>
+<div className={classes.headerTextContent}>
+    <div className={classes.hero}>
+        <h1>Innovate and Elevate with Every Creation</h1>
+        <p>Discover, build, and share cutting-edge contraptions with inventors worldwide.</p>
+    </div>
+    <div className={classes.cta}>
+        <Link href={'/community'}>Join the Community</Link>
+        <Link href={'/contraptions'}>Explore Contraptions</Link>
+    </div>
+</div>
              </header>
             <main>
                 <section className={classes.section}>

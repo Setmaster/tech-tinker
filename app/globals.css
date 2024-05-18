@@ -12,19 +12,13 @@ html {
 body {
     height: 100%;
     margin: 0;
+
 }
 
 main {
     text-align: center;
 
 }
-
-/*main img {*/
-/*    width: 16rem;*/
-/*    height: 16rem;*/
-/*    object-fit: cover;*/
-/*    filter: drop-shadow(0 0 4px #f6c363);*/
-/*}*/
 
 h1 {
     font-size: 3rem;
