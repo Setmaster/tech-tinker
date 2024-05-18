@@ -35,6 +35,7 @@ export default function ContraptionCard({title, slug, image, creator, views, com
                     layout="fill"
                     className={classes.image}
                     objectFit="cover" // This ensures the image covers the area of the div
+                    // fill
                 />
             </div>
             <div className={classes.overlay} />
