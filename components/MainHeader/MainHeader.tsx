@@ -5,9 +5,10 @@ import {IconChevronDown} from '@tabler/icons-react';
 import techTinkerLogo from '@/assets/logo.png';
 import classes from './MainHeader.module.css';
 import Link from "next/link";
-import {useRouter} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import Image from "next/image";
 import ColorSchemeToggle from "@/components/ColorSchemeToggle/ColorSchemeToggle";
+import classNames from "classnames";
 
 const links = [
     {link: '/contraptions', label: 'Contraptions'},
@@ -26,12 +27,27 @@ const links = [
 export default function MainHeader() {
     const [opened, {toggle}] = useDisclosure(false);
 
+    const path = usePathname();
+    
     const router = useRouter();
     const navigateHome = () => router.push('/');
+
+    const isActiveLink = (currentPath:string, link:string) => {
+        // Normalize paths by removing trailing slashes for consistent comparison
+        const normalizePath = (path:string) => path.endsWith('/') ? path.slice(0, -1) : path;
+        currentPath = normalizePath(currentPath);
+        link = normalizePath(link);
+
+        console.log(currentPath, link)
+        // Check for exact match
+        if (currentPath === link) return true;
+
+        return false;
+    };
     
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (
-            <Menu.Item key={item.link}><Link href={item.link} className={classes.link}>{item.label}</Link></Menu.Item>
+            <Menu.Item key={item.link}><Link href={item.link} className={classNames(classes.link, { [classes.subActive]: isActiveLink(path, item.link) })}>{item.label}</Link></Menu.Item>
         ));
 
         if (menuItems) {
@@ -40,7 +56,7 @@ export default function MainHeader() {
                     <Menu.Target>
                         <Link
                             href={link.link}
-                            className={classes.link}
+                            className={classNames(classes.link, { [classes.active]: isActiveLink(path, link.link) })}
                         >
                             <Center>
                                 <span className={classes.linkLabel}>{link.label}</span>
@@ -57,7 +73,7 @@ export default function MainHeader() {
             <Link
                 key={link.label}
                 href={link.link}
-                className={classes.link}
+                className={classNames(classes.link, { [classes.active]: isActiveLink(path, link.link) })}
             >
                 {link.label}
             </Link>
