@@ -16,8 +16,6 @@
 .control {
     position: absolute;
     width: rem(250px);
-    left: 50%;
-    transform: translateX(-50%); /* Adjust horizontally to truly center, considering its own width */
     bottom: rem(-20px);
 }
 
