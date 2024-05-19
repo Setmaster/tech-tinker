@@ -1,61 +1,77 @@
 'use client';
 
-import { Text, Group, Button, rem, useMantineTheme } from '@mantine/core';
-import { Dropzone, MIME_TYPES } from '@mantine/dropzone';
-import { IconCloudUpload, IconX, IconDownload } from '@tabler/icons-react';
-import {useRef} from "react";
+import {Text, Group, Button, rem, useMantineTheme} from '@mantine/core';
+import {Dropzone, MIME_TYPES} from '@mantine/dropzone';
+import {IconCloudUpload, IconX, IconDownload} from '@tabler/icons-react';
+import {useRef, useState} from "react";
 import classes from './ImageDropzone.module.css';
+import Image from "next/image";
 
 export default function ImageDropzone() {
     const theme = useMantineTheme();
     const imageRef = useRef<() => void>(null);
+    const [imageSrc, setImageSrc] = useState<string | null>(null);
+
+    function handleImageDrop(files: File[]) {
+        const file = files[0];
+        if (file) {
+            const fileUrl = URL.createObjectURL(file);
+            setImageSrc(fileUrl); // Update the imageSrc state with the file URL
+        }
+    }
 
     return (
         <div className={classes.wrapper}>
             <Dropzone
                 openRef={imageRef}
-                onDrop={() => {
-                    console.log('Image dropped');
-                }}
+                onDrop={handleImageDrop}
                 className={classes.dropzone}
                 radius="md"
-                accept={[MIME_TYPES.jpeg, MIME_TYPES.png ]}
+                accept={[MIME_TYPES.jpeg, MIME_TYPES.png]}
                 maxSize={1 * 1024 ** 2}
             >
-                <div style={{ pointerEvents: 'none' }}>
-                    <Group justify="center">
-                        <Dropzone.Accept>
-                            <IconDownload
-                                style={{ width: rem(50), height: rem(50) }}
-                                color={theme.colors.blue[6]}
-                                stroke={1.5}
-                            />
-                        </Dropzone.Accept>
-                        <Dropzone.Reject>
-                            <IconX
-                                style={{ width: rem(50), height: rem(50) }}
-                                color={theme.colors.red[6]}
-                                stroke={1.5}
-                            />
-                        </Dropzone.Reject>
-                        <Dropzone.Idle>
-                            <IconCloudUpload style={{ width: rem(50), height: rem(50) }} stroke={1.5} />
-                        </Dropzone.Idle>
-                    </Group>
+                {!imageSrc &&
+                    <div style={{pointerEvents: 'none'}}>
+                        <Group justify="center">
+                            <Dropzone.Accept>
+                                <IconDownload
+                                    style={{width: rem(50), height: rem(50)}}
+                                    color={theme.colors.blue[6]}
+                                    stroke={1.5}
+                                />
+                            </Dropzone.Accept>
+                            <Dropzone.Reject>
+                                <IconX
+                                    style={{width: rem(50), height: rem(50)}}
+                                    color={theme.colors.red[6]}
+                                    stroke={1.5}
+                                />
+                            </Dropzone.Reject>
+                            <Dropzone.Idle>
+                                <IconCloudUpload style={{width: rem(50), height: rem(50)}} stroke={1.5}/>
+                            </Dropzone.Idle>
+                        </Group>
 
-                    <Text ta="center" fw={700} fz="lg" mt="xl">
-                        <Dropzone.Accept>Drop files here</Dropzone.Accept>
-                        <Dropzone.Reject>Image file less than 1mb</Dropzone.Reject>
-                        <Dropzone.Idle>Upload image</Dropzone.Idle>
-                    </Text>
-                    <Text ta="center" fz="sm" mt="xs" c="dimmed">
-                        Drag&apos;n&apos;drop your contraption image here to upload.
-                    </Text>
-                </div>
+                        <Text ta="center" fw={700} fz="lg" mt="xl">
+                            <Dropzone.Accept>Drop files here</Dropzone.Accept>
+                            <Dropzone.Reject>Image file less than 1mb</Dropzone.Reject>
+                            <Dropzone.Idle>Upload image</Dropzone.Idle>
+                        </Text>
+                        <Text ta="center" fz="sm" mt="xs" c="dimmed">
+                            Drag&apos;n&apos;drop your contraption image here to upload.
+                        </Text>
+                    </div>
+                }
+                {imageSrc &&
+                    <Image
+                        src={imageSrc}
+                        alt="uploaded image"
+                        style={{objectFit: "cover"}} // This ensures the image covers the area of the div
+                        width={200} height={200}/>}
             </Dropzone>
 
             <Button className={classes.control} size="md" radius="xl" onClick={() => imageRef.current?.()}>
-                Select files
+                Select image
             </Button>
         </div>
     );
