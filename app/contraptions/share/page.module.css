@@ -1,0 +1,28 @@
+.main {
+    width: 90%;
+    max-width: 75rem;
+    margin: 3rem auto;
+
+}
+
+.highlight{
+    background: linear-gradient(90deg, #2a46f9, #05ffc5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.actions button {
+    border: 0;
+    background: linear-gradient(90deg, #2a46f9, #05ffc5);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    font: inherit;
+    font-size: 1.25rem;
+}
+
+.actions button:hover,
+.actions button:focus {
+    background: linear-gradient(90deg, #142ac1, #008b67);
+}
