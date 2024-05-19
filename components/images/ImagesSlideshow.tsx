@@ -13,7 +13,7 @@ export default function ImagesSlideshow({contraptions} : ContraptionPropsArray) 
 
     const slides = contraptions.map((contraption, index) => (
         <Carousel.Slide key={index}>
-            <Image className={classes.slideImage} width={556} height={556} src={`${IMAGE_BASE_URL}${contraption.image}`} alt={contraption.description}/>
+            <Image className={classes.slideImage} width={556} height={556} src={`${IMAGE_BASE_URL}${contraption.image}`} alt={contraption.summary}/>
         </Carousel.Slide>
     ));
     

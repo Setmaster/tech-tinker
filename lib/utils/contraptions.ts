@@ -12,3 +12,7 @@ export async function getAllContraptions(): Promise<ContraptionProps[]> {
 export function getContraptions(amount: number){
     return db.prepare(`SELECT * FROM contraptions LIMIT ${amount}`).all() as ContraptionProps[];
 }
+
+export function getContraption(slug: string){
+    return db.prepare('SELECT * FROM contraptions WHERE slug = ?').get(slug) as ContraptionProps;
+}
