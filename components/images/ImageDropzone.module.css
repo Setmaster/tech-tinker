@@ -3,7 +3,7 @@
     justify-content: center; /* Center children horizontally */
     align-items: center; /* Center children vertically */
     position: relative;
-    margin-bottom: rem(30px);
+    margin-bottom: rem(50px);
     width: 100%; 
 }
 
@@ -16,7 +16,7 @@
 .control {
     position: absolute;
     width: rem(250px);
-    bottom: rem(-20px);
+    bottom: rem(-50px);
 }
 
 .icon {

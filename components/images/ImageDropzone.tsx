@@ -5,7 +5,8 @@ import {Dropzone, MIME_TYPES} from '@mantine/dropzone';
 import {IconCloudUpload, IconX, IconDownload} from '@tabler/icons-react';
 import {useRef, useState} from "react";
 import classes from './ImageDropzone.module.css';
-import Image from "next/image";
+import Image from "next/image"
+import '@mantine/dropzone/styles.css';
 
 export default function ImageDropzone() {
     const theme = useMantineTheme();
@@ -14,10 +15,13 @@ export default function ImageDropzone() {
 
     function handleImageDrop(files: File[]) {
         const file = files[0];
-        if (file) {
-            const fileUrl = URL.createObjectURL(file);
-            setImageSrc(fileUrl); // Update the imageSrc state with the file URL
+        if (!file) {
+            setImageSrc(null);
+            return;
         }
+        const fileUrl = URL.createObjectURL(file);
+        setImageSrc(fileUrl); // Update the imageSrc state with the file URL
+
     }
 
     return (
@@ -29,6 +33,7 @@ export default function ImageDropzone() {
                 radius="md"
                 accept={[MIME_TYPES.jpeg, MIME_TYPES.png]}
                 maxSize={1 * 1024 ** 2}
+                aria-required={true}
             >
                 {!imageSrc &&
                     <div style={{pointerEvents: 'none'}}>
