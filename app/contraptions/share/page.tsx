@@ -3,6 +3,7 @@
 import { TextInput, Textarea, SimpleGrid, Group, Title, Button } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import classes from './page.module.css';
+import ImageDropzone from "@/components/images/ImageDropzone";
 
 export default function ShareContraptionPage(){
     const form = useForm({
@@ -81,7 +82,8 @@ export default function ShareContraptionPage(){
                 />
 
                 <Group className={classes.actions} justify="center" mt="xl">
-                    <Button type="submit" size="md">
+                    <ImageDropzone/>
+                    <Button className={classes.submit} type="submit" size="md">
                         Share Contraption
                     </Button>
                 </Group>

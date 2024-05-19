@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex; 
+    justify-content: center; /* Center children horizontally */
+    align-items: center; /* Center children vertically */
+    position: relative;
+    margin-bottom: rem(30px);
+    width: 100%; 
+}
+
+.dropzone {
+    border-width: rem(1px);
+    width: 50%; 
+    padding-bottom: rem(50px);
+}
+
+.control {
+    position: absolute;
+    width: rem(250px);
+    left: 50%;
+    transform: translateX(-50%); /* Adjust horizontally to truly center, considering its own width */
+    bottom: rem(-20px);
+}
+
+.icon {
+    color: light-dark(var(--mantine-color-gray-4), var(--mantine-color-dark-3));
+}
+

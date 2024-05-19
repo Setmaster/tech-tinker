@@ -12,6 +12,11 @@
     -webkit-text-fill-color: transparent;
 }
 
+.actions{
+
+}
+
+
 .actions button {
     border: 0;
     background: linear-gradient(90deg, #2a46f9, #05ffc5);
@@ -20,9 +25,14 @@
     cursor: pointer;
     font: inherit;
     font-size: 1.25rem;
+    align-self: end;
 }
 
 .actions button:hover,
 .actions button:focus {
     background: linear-gradient(90deg, #142ac1, #008b67);
+}
+
+.submit{
+    margin-bottom: rem(10px);
 }
