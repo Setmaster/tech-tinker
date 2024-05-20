@@ -8,11 +8,15 @@ import classes from './ImageDropzone.module.css';
 import Image from "next/image"
 import '@mantine/dropzone/styles.css';
 
-export default function ImageDropzone() {
+type ImageDropzoneProps = {
+    form: any;
+}
+
+export default function ImageDropzone({form}: ImageDropzoneProps) {
     const theme = useMantineTheme();
     const imageRef = useRef<() => void>(null);
     const [imageSrc, setImageSrc] = useState<string | null>(null);
-
+    
     function handleImageDrop(files: File[]) {
         const file = files[0];
         if (!file) {
@@ -21,7 +25,7 @@ export default function ImageDropzone() {
         }
         const fileUrl = URL.createObjectURL(file);
         setImageSrc(fileUrl); // Update the imageSrc state with the file URL
-
+        form.setFieldValue('image', file); // Update the form state with the file
     }
 
     return (
@@ -29,6 +33,7 @@ export default function ImageDropzone() {
             <Dropzone
                 openRef={imageRef}
                 onDrop={handleImageDrop}
+                onReject={() => setImageSrc(null)}
                 className={classes.dropzone}
                 radius="md"
                 accept={[MIME_TYPES.jpeg, MIME_TYPES.png]}

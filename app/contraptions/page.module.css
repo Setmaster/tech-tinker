@@ -12,6 +12,11 @@
     text-align: center;
 }
 
+.main {
+padding-left: rem(20px);
+padding-right: rem(20px);
+}
+
 .header h1 {
     font-family: 'Montserrat', sans-serif;
 }

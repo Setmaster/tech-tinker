@@ -1,6 +1,6 @@
 import classes from './page.module.css';
 import Image from "next/image";
-import {getContraption} from "@/lib/utils/contraptions";
+import {getContraption} from "@/lib/utils/contraptionsDBActions";
 import {IMAGE_BASE_URL} from "@/lib/constants";
 import {notFound} from "next/navigation";
 

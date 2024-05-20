@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import classes from './page.module.css';
 import ContraptionGrid from "@/components/contraptions/ContraptionGrid";
-import {getAllContraptions} from "@/lib/utils/contraptions";
+import {getAllContraptions} from "@/lib/utils/contraptionsDBActions";
 import {Suspense} from "react";
 
 async function Contraptions(){
