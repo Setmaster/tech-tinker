@@ -26,15 +26,13 @@ export async function shareContraption(formData: FormData) {
     const result = contraptionSchema.safeParse(contraptionData);
 
     if (!result.success) {
-        console.error(result.error);
-        return;
+        throw result.error;
     }
 
     // Check if an image file has been provided separately
     const imageFile = formData.get('image');
     if (!imageFile || typeof imageFile === 'string') {
-        console.error("Image file is required");
-        return;
+        throw new Error("Image file is required");
     }
 
     // If validation passes, and an image file is present, proceed with saving the data
