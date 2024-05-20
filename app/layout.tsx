@@ -4,6 +4,7 @@ import '@mantine/carousel/styles.css';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import MainHeader from "@/components/MainHeader/MainHeader";
 import { theme } from '@/theme';
+import React from "react";
 
 export const metadata = {
     title: 'Tech Tinker',

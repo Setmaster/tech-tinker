@@ -10,7 +10,7 @@ import {IMAGE_BASE_URL} from "@/lib/constants";
 type ContraptionCardProps = {
     title: string;
     slug: string;
-    image: string;
+    image: File | string;
     creator: string;
     views: number;
     comments: number;

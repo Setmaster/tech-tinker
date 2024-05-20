@@ -1,7 +1,7 @@
 export type ContraptionProps = {
     id: number;
     title: string;
-    image: string;
+    image: File | string;
     summary: string;
     instructions: string;
     creator: string;

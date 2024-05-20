@@ -1,5 +1,3 @@
-import ImagesSlideshow from "@/components/images/ImagesSlideshow";
-
 export default function ContactPage(){
     return(
         <main>

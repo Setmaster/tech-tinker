@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.577.0",
     "@mantine/carousel": "^7.9.2",
     "@mantine/charts": "^7.9.2",
     "@mantine/code-highlight": "^7.9.2",
@@ -34,7 +35,9 @@
     "next": "14.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "recharts": "^2.12.7"
+    "recharts": "^2.12.7",
+    "slugify": "^1.6.6",
+    "xss": "^1.0.15"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.10",

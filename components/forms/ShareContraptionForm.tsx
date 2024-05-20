@@ -6,6 +6,7 @@ import {shareContraption} from "@/lib/utils/contraptionsServerActions";
 import classes from "@/app/contraptions/share/page.module.css";
 import ImageDropzone from "@/components/images/ImageDropzone";
 import {ContraptionFormProps, ContraptionFormSerializableProps} from "@/lib/types/contraptionTypes";
+import {deleteExtraContraptions} from "@/lib/utils/contraptionsDBActions";
 
 export default function ShareContraptionForm() {
     const form = useForm({
@@ -27,12 +28,20 @@ export default function ShareContraptionForm() {
     });
 
     const submitHandler = async (values : ContraptionFormProps) =>{
-        console.log(values);
-        const serializableValues: ContraptionFormSerializableProps = {
-            ...values,
-            image: null, // Pending image handling
-        };
-        await shareContraption(serializableValues);
+        // Create a FormData object
+        const formData = new FormData();
+
+        // Append all your form fields to the FormData object
+        formData.append('name', values.name);
+        formData.append('email', values.email);
+        formData.append('title', values.title);
+        formData.append('summary', values.summary);
+        formData.append('instructions', values.instructions);
+        
+        if (!values.image) return; 
+        
+        formData.append('image', values.image);
+         await shareContraption(formData);
     }
 
 

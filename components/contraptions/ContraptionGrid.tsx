@@ -1,10 +1,10 @@
 import {SimpleGrid} from '@mantine/core';
 
 import ContraptionCard from "@/components/contraptions/ContraptionCard";
-import { ContraptionPropsArray} from "@/lib/types/contraptionTypes";
+import {ContraptionPropsArray} from "@/lib/types/contraptionTypes";
 
 export default function ContraptionGrid({contraptions}: ContraptionPropsArray) {
-    const cards = contraptions.map((data, index) => (
+    const cards = contraptions.map((data) => (
             <ContraptionCard
                 key={data.id}
                 title={data.title}

@@ -1,17 +1,20 @@
 'use server'
 
-import {ContraptionFormSerializableProps} from "@/lib/types/contraptionTypes";
+import {ContraptionProps} from "@/lib/types/contraptionTypes";
+import {deleteContraption, deleteExtraContraptions, saveContraption} from "@/lib/utils/contraptionsDBActions";
+import {redirect} from "next/navigation";
 
-export async function shareContraption(serializableValues: ContraptionFormSerializableProps) {
-    console.log(serializableValues);
+export async function shareContraption(formData: FormData) {
 
     const contraption={
-        creator: serializableValues['name'],
-        // email: serializableValues['email'], unused for now
-        title: serializableValues['title'],
-        summary: serializableValues['summary'],
-        instructions: serializableValues['instructions'],
+        creator:  formData.get('name'),
+        // email: formData.get('email'), unused for now
+        title: formData.get('title'),
+        summary: formData.get('summary'),
+        instructions: formData.get('instructions'),
+        image: formData.get('image')
     }
-
-    console.log(contraption);
+    
+    await saveContraption(<ContraptionProps>contraption);
+    redirect('/contraptions');
 }

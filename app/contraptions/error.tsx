@@ -1,6 +1,6 @@
 'use client';
 
-import {Button, Container, Group, Title, Text} from "@mantine/core";
+import {Container, Group, Title, Text} from "@mantine/core";
 import classes from './error.module.css';
 import Link from "next/link";
 
