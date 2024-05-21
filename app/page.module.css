@@ -25,7 +25,7 @@
         }
     height: auto; 
     align-content: center;
-    @media (max-width: mantine-spacing-xss) {
+    @media (max-width: $mantine-breakpoint-xss) {
         margin: 2rem;
     }
 }
