@@ -27,7 +27,7 @@ export async function generateMetadata({params}: ContraptionDetailsPageProps) {
 export default async function ContraptionDetailsPage({params}: ContraptionDetailsPageProps) {
     const contraption = await getContraption(params.contraptionSlug);
 
-    console.log("Received contraption detals: ", contraption);
+    // console.log("Received contraption detals: ", contraption);
     
     if(!contraption) {
     notFound();

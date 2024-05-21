@@ -1,9 +1,13 @@
 .header {
-    display: flex;
-    gap: 3rem;
-    margin: 3rem auto; 
-    width: 90%;
-    justify-content: center; 
+    display: grid;
+    @media (min-width: 412px) {
+        margin: 2rem 2rem 2rem 2rem;
+    }
+    @media (min-width: $mantine-breakpoint-sm) {
+        gap: 3rem;
+        display: flex;
+        margin: 3rem 3rem 3rem 3rem;
+    }
 }
 
 .headerTextContent {
@@ -16,7 +20,9 @@
 
 
 .slideshow {
+    @media (min-width: $mantine-breakpoint-sm) {
     width: 80%;
+        }
     height: auto; 
     align-content: center;
 }
