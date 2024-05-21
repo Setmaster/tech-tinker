@@ -1,5 +1,5 @@
-const sql = require('better-sqlite3');
-const db = sql('contraptions.db');
+import { sql } from '@vercel/postgres';
+import { NextResponse } from 'next/server';
 
 const dummyContraptions = [
     {
@@ -113,32 +113,21 @@ const dummyContraptions = [
     },
 ];
 
-db.prepare(`
-  CREATE TABLE IF NOT EXISTS contraptions (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      slug TEXT NOT NULL UNIQUE,
-      title TEXT NOT NULL,
-      image TEXT NOT NULL,
-      summary TEXT NOT NULL,
-      instructions TEXT NOT NULL,
-      creator TEXT NOT NULL,
-      views INTEGER NOT NULL,
-      commentsAmount INTEGER NOT NULL
-  )
-`).run();
 
-async function initData() {
-    const stmt = db.prepare(`
-      INSERT INTO contraptions (
-         id, slug, title, image, summary, instructions, creator, views, commentsAmount
-      ) VALUES (
-         null, @slug, @title, @image, @summary, @instructions, @creator, @views, @commentsAmount
-      )
-  `);
-
-    for (const contraption of dummyContraptions) {
-        stmt.run(contraption);
+export async function GET() {
+    try {
+        for (const contraption of dummyContraptions) {
+            const result = await sql`
+        INSERT INTO contraptions (slug, title, image, summary, instructions, creator, views, commentsAmount)
+        VALUES (${contraption.slug}, ${contraption.title}, ${contraption.image}, 
+                ${contraption.summary}, ${contraption.instructions}, 
+                ${contraption.creator}, ${contraption.views}, ${contraption.commentsAmount})
+      `;
+        }
+    } catch (error) {
+        return NextResponse.json({ error }, { status: 500 });
     }
-}
+    const contraptions = await sql`SELECT * FROM contraptions`;
+    return NextResponse.json({ contraptions }, { status: 200 });
 
-initData();
+}

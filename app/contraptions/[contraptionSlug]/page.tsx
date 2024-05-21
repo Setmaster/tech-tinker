@@ -3,6 +3,7 @@ import Image from "next/image";
 import {getContraption} from "@/lib/utils/contraptionsDBActions";
 import {IMAGE_BASE_URL} from "@/lib/constants";
 import {notFound} from "next/navigation";
+import {ContraptionProps} from "@/lib/types/contraptionTypes";
 
 type ContraptionDetailsPageProps = {
     params: {
@@ -11,7 +12,7 @@ type ContraptionDetailsPageProps = {
 };
 
 export async function generateMetadata({params}: ContraptionDetailsPageProps) {
-    const contraption = getContraption(params.contraptionSlug);
+    const contraption = await getContraption(params.contraptionSlug) as unknown as ContraptionProps;
     
     if(!contraption) {
     notFound();
@@ -23,8 +24,10 @@ export async function generateMetadata({params}: ContraptionDetailsPageProps) {
     };
 }
 
-export default function ContraptionDetailsPage({params}: ContraptionDetailsPageProps) {
-    const contraption = getContraption(params.contraptionSlug);
+export default async function ContraptionDetailsPage({params}: ContraptionDetailsPageProps) {
+    const contraption = await getContraption(params.contraptionSlug);
+
+    console.log("Received contraption detals: ", contraption);
     
     if(!contraption) {
     notFound();

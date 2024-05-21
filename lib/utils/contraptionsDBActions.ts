@@ -1,4 +1,4 @@
-import sql from 'better-sqlite3'
+import { sql } from '@vercel/postgres';
 import {ContraptionProps, ContraptionPropsArray} from "@/lib/types/contraptionTypes";
 import slugify from "slugify";
 import xss from "xss";
@@ -8,25 +8,26 @@ const s3 = new S3({
     region: 'us-east-1'
 });
 
-const db = sql('contraptions.db');
-
 export async function getAllContraptions(): Promise<ContraptionProps[]> {
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate slow network
-    // throw new Error('Server error');
-    return db.prepare('SELECT * FROM contraptions').all() as ContraptionProps[];
+    await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate slow network, if needed
+    const contraptions = await sql`SELECT * FROM contraptions`;
+    return contraptions.rows as unknown as ContraptionProps[];
 }
 
-export function getContraptions(amount: number) {
-    return db.prepare(`SELECT *
-                       FROM contraptions LIMIT ${amount}`).all() as ContraptionProps[];
+export async function getContraptions(amount: number): Promise<ContraptionProps[]> {
+    const contraptions = await sql`SELECT * FROM contraptions LIMIT ${amount}`;
+    return contraptions.rows as unknown as ContraptionProps[];
 }
 
-export function getContraption(slug: string) {
-    return db.prepare('SELECT * FROM contraptions WHERE slug = ?').get(slug) as ContraptionProps;
+export async function getContraption(slug: string): Promise<ContraptionProps> {
+    const contraption = await sql`SELECT * FROM contraptions WHERE slug = ${slug}`;
+    const contraptionData = contraption.rows[0]; 
+    // console.log("Sending details for contraption: ", contraptionData);
+    return contraptionData as unknown as ContraptionProps;
 }
 
 export async function saveContraption(contraption: ContraptionProps) {
-    if (typeof contraption.image === "string") return;
+    if (!contraption.image || typeof contraption.image === "string") return;
 
     let slug = slugify(contraption.title, { lower: true });
     let uniqueSlug = slug;
@@ -55,41 +56,40 @@ export async function saveContraption(contraption: ContraptionProps) {
 
     contraption.image = fileName;
 
-    //dummy values for views and comments
-    contraption.views = Math.floor(Math.random() * 101); // Random number between 0 and 100
-    contraption.commentsAmount = Math.floor(Math.random() * 101); // Random number between 0 and 100
-    console.log("Contraption to save: ", contraption);
-
-    db.prepare('INSERT INTO contraptions (title, image, summary, instructions, creator, slug, commentsAmount, views) VALUES (@title, @image, @summary, @instructions, @creator, @slug, @commentsAmount, @views)').run(contraption);
+    await sql`
+        INSERT INTO contraptions (title, image, summary, instructions, creator, slug, commentsAmount, views)
+        VALUES (${contraption.title}, ${fileName}, ${contraption.summary}, ${contraption.instructions}, 
+                ${contraption.creator}, ${uniqueSlug}, ${contraption.commentsAmount}, ${contraption.views})
+    `;
 }
 
 async function slugExists(slug: string): Promise<boolean> {
-    const result = db.prepare('SELECT COUNT(*) AS count FROM contraptions WHERE slug = ?').get(slug) as { count: number };
-    return result.count > 0;
+    const result = await sql`SELECT COUNT(*) FROM contraptions WHERE slug = ${slug}` as unknown as number;
+    return result > 0;
 }
 
-export async function deleteContraption(slug: string) {
-    console.log("Deleting contraption with slug: ", slug)
-    const contraption = getContraption(slug);
-    console.log("Contraption to delete: ", contraption)
-    if (typeof contraption.image !== "string") return;
-    s3.deleteObject({
-        Bucket: 'tinker-tech-user-images',
-        Key: contraption.image,
-    });
-    db.prepare('DELETE FROM contraptions WHERE slug = ?').run(slug);
+async function deleteContraption(slug: string) {
+    const result = await sql`SELECT * FROM contraptions WHERE slug = ${slug}` as unknown as ContraptionProps[];
+    const contraption = result[0];
+
+    if (contraption && typeof contraption.image === "string") {
+        await s3.deleteObject({
+            Bucket: 'tinker-tech-user-images',
+            Key: contraption.image,
+        })
+    }
+
+    await sql`DELETE FROM contraptions WHERE slug = ${slug}`;
 }
 
-// Function to delete all but the first 7 dummy data entries
-export async function deleteExtraContraptions() {
-    // Fetch all contraption slugs, but skip the first 7
-    const contraptionsToDelete  = db.prepare('SELECT slug FROM contraptions ORDER BY id ASC LIMIT -1 OFFSET 7').all()  as ContraptionProps[];
+export async function deleteNonDummyContraptions() {
+    const contraptionsToDelete = await sql`
+        SELECT slug FROM contraptions ORDER BY id ASC OFFSET 7
+    ` as unknown as { slug: string }[];
 
-    // Iterate over each contraption and use the deleteContraption function
     for (const { slug } of contraptionsToDelete) {
         try {
-            deleteContraption(slug);
-            console.log(`Deleted contraption and image for slug: ${slug}`);
+            await deleteContraption(slug);
         } catch (error) {
             console.error(`Failed to delete contraption for slug: ${slug}`, error);
         }
