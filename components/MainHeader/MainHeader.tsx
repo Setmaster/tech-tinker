@@ -1,55 +1,60 @@
 'use client';
-import {Burger, Center, Container, Group, Menu} from '@mantine/core';
-import {useDisclosure} from '@mantine/hooks';
-import {IconChevronDown} from '@tabler/icons-react';
+import { Burger, Center, Container, Group, Menu, Stack } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
+import { IconChevronDown } from '@tabler/icons-react';
 import techTinkerLogo from '@/assets/logo.png';
 import classes from './MainHeader.module.css';
 import Link from "next/link";
-import {usePathname, useRouter} from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import ColorSchemeToggle from "@/components/ColorSchemeToggle/ColorSchemeToggle";
 import classNames from "classnames";
 
-const links = [
-    {link: '/contraptions', label: 'Contraptions'},
-    {link: '/contraptions/share', label: 'Share'},
-    {link: '/community', label: 'Community'},
+// Define the interface for links
+interface LinkItem {
+    link: string;
+    label: string;
+    links?: LinkItem[];
+}
+
+const links: LinkItem[] = [
+    { link: '/contraptions', label: 'Contraptions' },
+    { link: '/contraptions/share', label: 'Share' },
+    { link: '/community', label: 'Community' },
     {
         link: '/about',
         label: 'About',
         links: [
-            {link: '/faq', label: 'FAQ'},
-            {link: '/contact', label: 'Contact'},
+            { link: '/faq', label: 'FAQ' },
+            { link: '/contact', label: 'Contact' },
         ],
     },
 ];
 
 export default function MainHeader() {
-    const [opened, {toggle}] = useDisclosure(false);
+    const [opened, { toggle }] = useDisclosure(false);
 
     const path = usePathname();
-    
+
     const router = useRouter();
     const navigateHome = () => router.push('/');
 
-    const isActiveLink = (currentPath:string, link:string) => {
-        // Normalize paths by removing trailing slashes for consistent comparison
-        const normalizePath = (path:string) => path.endsWith('/') ? path.slice(0, -1) : path;
+    const isActiveLink = (currentPath: string, link: string) => {
+        const normalizePath = (path: string) => path.endsWith('/') ? path.slice(0, -1) : path;
         currentPath = normalizePath(currentPath);
         link = normalizePath(link);
-        
-        // Check for exact match
+
         return currentPath === link;
     };
-    
-    const items = links.map((link) => {
-        const menuItems = link.links?.map((item) => (
+
+    const items = links.map((link: LinkItem) => {
+        const menuItems = link.links?.map((item: LinkItem) => (
             <Menu.Item key={item.link}><Link href={item.link} className={classNames(classes.link, { [classes.subActive]: isActiveLink(path, item.link) })}>{item.label}</Link></Menu.Item>
         ));
 
         if (menuItems) {
             return (
-                <Menu key={link.label} trigger="hover" transitionProps={{exitDuration: 0}} withinPortal>
+                <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal>
                     <Menu.Target>
                         <Link
                             href={link.link}
@@ -77,20 +82,49 @@ export default function MainHeader() {
         );
     });
 
+    const processLinks = (links: LinkItem[]): LinkItem[] => {
+        let processedLinks: LinkItem[] = [];
+        links.forEach((link: LinkItem) => {
+            processedLinks.push({ link: link.link, label: link.label });
+            if (link.links) {
+                link.links.forEach((subLink: LinkItem) => {
+                    processedLinks.push({ link: subLink.link, label: subLink.label });
+                });
+            }
+        });
+        return processedLinks;
+    };
+
+    const dropdownItems = processLinks(links).map((item: LinkItem) => (
+        <Menu.Item key={item.link}>
+            <Link href={item.link} className={classNames(classes.link, { [classes.active]: isActiveLink(path, item.link) })}>
+                {item.label}
+            </Link>
+        </Menu.Item>
+    ));
+
     return (
         <header className={classes.header}>
             <Container size="md">
                 <div className={classes.inner}>
-                    <Image width={56} height={56} style={{cursor: "pointer"}} src={techTinkerLogo.src} onClick={navigateHome} alt={"a white robot with blue eyes"}/>
+                    <Image width={56} height={56} style={{ cursor: "pointer" }} src={techTinkerLogo.src} onClick={navigateHome} alt={"a white robot with blue eyes"}/>
                     <Group gap={5} visibleFrom="sm">
                         {items}
                         <ColorSchemeToggle />
                     </Group>
 
-                    <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm"/>
+                    <Menu shadow="md" width={200} opened={opened} onChange={toggle} withinPortal>
+                        <Menu.Target>
+                            <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm"/>
+                        </Menu.Target>
+                        <Menu.Dropdown>
+                            <Stack>
+                                {dropdownItems}
+                            </Stack>
+                        </Menu.Dropdown>
+                    </Menu>
                 </div>
             </Container>
-
         </header>
     );
 }
