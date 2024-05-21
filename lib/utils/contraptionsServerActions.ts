@@ -36,6 +36,11 @@ export async function shareContraption(formData: FormData) {
         throw new Error("Image file is required");
     }
 
+    // Check if image isn't too large
+    if (imageFile.size > 1 * 1024 ** 2) {
+        throw new Error("Image file is too large");
+    }
+    
     // If validation passes, and an image file is present, proceed with saving the data
     const validContraption = result.data;
     const processedContraptionData: ContraptionProps = <ContraptionProps>{

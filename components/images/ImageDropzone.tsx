@@ -37,7 +37,7 @@ export default function ImageDropzone({form}: ImageDropzoneProps) {
                 className={classes.dropzone}
                 radius="md"
                 accept={[MIME_TYPES.jpeg, MIME_TYPES.png]}
-                maxSize={1 * 1024 ** 2}
+                maxSize={1 * 1024 ** 2} // 1mb
                 aria-required={true}
             >
                 {!imageSrc &&
