@@ -22,8 +22,6 @@
 }
 
 .main {
-    width: 90%;
-    max-width: 40rem;
     margin: 0 auto;
     text-align: center;
 }
@@ -51,14 +49,23 @@
 }
 
 .perks img {
+    
     width: 36rem;
     height: 36rem;
+    @media (max-width: $mantine-breakpoint-sm) {
+        width: 18rem;
+        height: 18rem;
+    }
     object-fit: contain;
 }
 
 .perks img.community {
     height: 18rem;
     width: 36rem;
+    @media (max-width: $mantine-breakpoint-sm) {
+        height: 9rem;
+        width: 18rem;
+    }
 }
 
 .perks p {

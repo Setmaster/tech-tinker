@@ -25,7 +25,7 @@
         }
     height: auto; 
     align-content: center;
-    @media (max-width: 360px) {
+    @media (max-width: mantine-spacing-xss) {
         margin: 2rem;
     }
 }

@@ -11,8 +11,14 @@ export const metadata = {
 };
 
 export default function CommunityPage() {
+    const demoProps = {
+        bg: 'var(--mantine-color-blue-light)',
+        h: 50,
+        mt: 'md',
+    };
+    
     return (
-        <>
+<>
             <header className={classes.header}>
                 <h1>
                     One shared passion: <span className={classes.highlight}>Innovation</span>
@@ -37,6 +43,6 @@ export default function CommunityPage() {
                     </li>
                 </ul>
             </main>
-        </>
+  </>
     );
 }
