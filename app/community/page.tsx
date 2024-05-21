@@ -5,6 +5,11 @@ import communityIcon from '@/assets/community.png';
 import eventsIcon from '@/assets/events.png';
 import classes from './page.module.css';
 
+export const metadata = {
+    title: 'Tech Tinker - Community',
+    description: 'A community for inventors',
+};
+
 export default function CommunityPage() {
     return (
         <>

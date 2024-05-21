@@ -1,9 +1,10 @@
 'use server'
 
 import {ContraptionProps} from "@/lib/types/contraptionTypes";
-import {deleteContraption, deleteExtraContraptions, saveContraption} from "@/lib/utils/contraptionsDBActions";
+import {saveContraption} from "@/lib/utils/contraptionsDBActions";
 import {redirect} from "next/navigation";
-import { z } from 'zod';
+import {z} from 'zod';
+import {revalidatePath} from "next/cache";
 
 // Define a Zod schema for the contraption data
 const contraptionSchema = z.object({
@@ -42,5 +43,6 @@ export async function shareContraption(formData: FormData) {
         image: imageFile // Add the image file back into the data to be saved
     };
     await saveContraption(processedContraptionData);
+    revalidatePath('/contraptions');
     redirect('/contraptions');
 }

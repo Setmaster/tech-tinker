@@ -10,6 +10,19 @@ type ContraptionDetailsPageProps = {
     };
 };
 
+export async function generateMetadata({params}: ContraptionDetailsPageProps) {
+    const contraption = getContraption(params.contraptionSlug);
+    
+    if(!contraption) {
+    notFound();
+    }
+    
+    return {
+        title: contraption.title,
+        description: contraption.summary,
+    };
+}
+
 export default function ContraptionDetailsPage({params}: ContraptionDetailsPageProps) {
     const contraption = getContraption(params.contraptionSlug);
     

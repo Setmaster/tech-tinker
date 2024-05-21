@@ -9,6 +9,12 @@ async function Contraptions(){
     return <ContraptionGrid contraptions={contraptions} />
 }
 
+export const metadata = {
+    title: 'Tech Tinker - Contraptions',
+    description: 'Choose your favorite contraption!',
+};
+
+
 export default async function ContraptionsPage(){
     
     return(

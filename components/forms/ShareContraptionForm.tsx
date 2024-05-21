@@ -1,13 +1,11 @@
 'use client';
 
-import {TextInput, Checkbox, Button, Group, Box, Title, SimpleGrid, Textarea} from '@mantine/core';
+import {Group, SimpleGrid, Textarea, TextInput, Title} from '@mantine/core';
 import {useForm} from '@mantine/form';
 import {shareContraption} from "@/lib/utils/contraptionsServerActions";
 import classes from "@/app/contraptions/share/page.module.css";
 import ImageDropzone from "@/components/images/ImageDropzone";
-import {ContraptionFormProps, ContraptionFormSerializableProps} from "@/lib/types/contraptionTypes";
-import {deleteExtraContraptions} from "@/lib/utils/contraptionsDBActions";
-import {useFormStatus} from 'react-dom';
+import {ContraptionFormProps} from "@/lib/types/contraptionTypes";
 import ShareContraptionFormSubmitButton from "@/components/forms/ShareContraptionFormSubmitButton";
 import {useState} from "react";
 
@@ -50,7 +48,7 @@ export default function ShareContraptionForm() {
         setSubmitting(true);
         
         await shareContraption(formData);
-    }
+    };
 
     return (
         <form onSubmit={form.onSubmit(submitHandler)}>
