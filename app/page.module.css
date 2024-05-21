@@ -25,6 +25,9 @@
         }
     height: auto; 
     align-content: center;
+    @media (max-width: $mantine-breakpoint-xs) {
+        margin: 2rem;
+    }
 }
 
 .hero {
@@ -53,6 +56,10 @@
     gap: 1rem;
     justify-content: center;
     align-items: center;
+    @media (max-width: $mantine-breakpoint-xs) {
+        width: 80%;
+        gap: 0;
+    }
 }
 
 .cta a {
