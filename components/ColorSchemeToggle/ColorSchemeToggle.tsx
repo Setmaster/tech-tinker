@@ -6,12 +6,12 @@ import {IconSun, IconMoon} from '@tabler/icons-react';
 import classes from './ColorSchemeToggle.module.css';
 import {useEffect, useState} from "react";
 
-export default function ColorSchemeToggle() {
+export default function ColorSchemeToggle({justify = 'center'}) {
     const {setColorScheme} = useMantineColorScheme();
     const computedColorScheme = useComputedColorScheme('light', {getInitialValueInEffect: true});
     
     return (
-        <Group justify="center">
+        <Group justify={justify}>
             <ActionIcon
                 onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
                 variant="default"

@@ -120,6 +120,9 @@ export default function MainHeader() {
                         <Menu.Dropdown>
                             <Stack>
                                 {dropdownItems}
+                                <div className={classes.dropdownColorSchemeToggle}>
+                                    <ColorSchemeToggle justify={'left'} />
+                                </div>
                             </Stack>
                         </Menu.Dropdown>
                     </Menu>
